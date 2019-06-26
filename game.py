@@ -1,11 +1,12 @@
 class Weapon():
+    """Weapon Class to raise errors and return the weapon's name"""
     def __str__(self):
         raise NotImplementedError("Do not create raw Weapon objects")
         return self.name
 
 
-
 class Blaster(Weapon):
+    """Blaster weapon class with description and damage"""
     def __init__(self):
         self.name = "Blaster"
         self.description = """
@@ -14,7 +15,9 @@ class Blaster(Weapon):
                             """
         self.damage = 5
 
+
 class Knife(Weapon):
+    """Knife weapon class with description and damage"""
     def __init__(self):
         self.name = "Pocket Knife"
         self.description = """
@@ -26,10 +29,14 @@ class Knife(Weapon):
 
 
 def play():
+    """ Input for character movement and accessing inventory"""
     inventory = ["oxygen", "space suit", "first aid kit", "food", "water",
                  Blaster(), Knife()]
     print("Escape from the Ship!")
-
+    print("""
+          Do you want to go forward, aftward, port, starboard, or check
+          inventory?
+          """)
     while True:
         action_input = get_play_command()
         if action_input.lower() in ["forward", "for", "fore", "f"]:
@@ -54,12 +61,13 @@ def play():
             print("Invalid action!")
 
 
-
 def get_play_command():
+    """Input command for user """
     return input("Action: ")
 
 
 def most_powerful_weapon(inventory):
+    """Determine the most power weapon in the inventory"""
     max_damage = 0
     best_weapon = None
     for item in inventory:
@@ -72,8 +80,5 @@ def most_powerful_weapon(inventory):
     print(best_weapon)
     return best_weapon
 
-
-#blaster = Blaster()
-#knifey = Knife()
 
 play()
