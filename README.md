@@ -28,7 +28,7 @@
     - added an exception to the Weapons class to prevent from accidentally
     creating objects
 * Step 8: p.71-74
-    - created an external file to store all classes called item.py
+    - created an external file to store items classes called item.py
     - created an external file for the Player class called player.py
     - moved most_powerful_weapon to Player class
     - removed most_powerful_weapon option from game.py because it was added to
