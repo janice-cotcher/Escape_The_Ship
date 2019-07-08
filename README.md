@@ -32,4 +32,23 @@
     - created an external file for the Player class called player.py
     - moved most_powerful_weapon to Player class
     - removed most_powerful_weapon option from game.py because it was added to
-    print_inventory
+* Step 9: p.78-83
+    - would be useful to connect the coordinate system to Processing
+    - created a map class called ship.py
+    - added classes for empty tiles, a supply tile, an escape pod tile
+    - added a function that links the tile to coordinates
+    - initialized the player's starting position in the Player class
+    - add methods to the MapTile class that defines movement
+    - add direction methods to game.py
+    - the game crashes if the player is in an empty position (which the text
+        says will be addressed later)
+* Step 19: p.85 -
+    - added enemies with name, health points and damage
+    - added the random module to ship.py
+    - added enemies at random positions on the Map
+    - replaced some of the empty map tiles with enemy tiles
+    - added a print statement for the random numbers generated for the enemy
+    positions on the MapTile because Space Trolls were appear too often (later
+        commented out)
+        - changed the conditional statements to less and greater than and equal
+        to and it seemed to fix the problem
