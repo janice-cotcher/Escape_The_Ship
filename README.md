@@ -42,7 +42,7 @@
     - add direction methods to game.py
     - the game crashes if the player is in an empty position (which the text
         says will be addressed later)
-* Step 19: p.85 -
+* Step 10: p.85 -
     - added enemies with name, health points and damage
     - added the random module to ship.py
     - added enemies at random positions on the Map
@@ -52,3 +52,4 @@
         commented out)
         - changed the conditional statements to less and greater than and equal
         to and it seemed to fix the problem
+    continue on p.89
