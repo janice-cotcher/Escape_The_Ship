@@ -42,7 +42,7 @@
     - add direction methods to game.py
     - the game crashes if the player is in an empty position (which the text
         says will be addressed later)
-* Step 10: p.85 -
+* Step 10: p.85 - 92
     - added enemies with name, health points and damage
     - added the random module to ship.py
     - added enemies at random positions on the Map
@@ -52,4 +52,11 @@
         commented out)
         - changed the conditional statements to less and greater than and equal
         to and it seemed to fix the problem
-    continue on p.89
+    - added the ability for the player to attack
+    - added the ability for the enemy to fight back to the MapTile class
+    - added health points to the player class
+    - modified the modify_player method from the Text suggestion p.89
+        - used assignment by subtraction
+        - added the enemy name to the print statement
+    - added a base method to the MapTile class to implement modify_player on
+    every tile

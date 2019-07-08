@@ -8,3 +8,8 @@ v1.1
 - created a ship map on an x-y coordinate system
     - empty tiles, a supply tile, an escape pod tile, and enemy tiles
 - generated random enemies on the ship map
+v1.2
+- added a Flock of Space Ducks to the Enemy Class
+- updated the intro text to reflect the ability to attack
+- added player health points
+- added ability to track the player and enemy health points
