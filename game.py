@@ -5,14 +5,19 @@ import ship
 def play():
     """ Input for character movement and accessing inventory"""
     print("Escape from the Ship!")
-    print("""
-          Do you want to go forward, aftward, port, starboard, or check
-          inventory
-          """)
+    # print("""
+    #       Do you want to go forward, aftward, port, starboard, or check
+    #       inventory
+    #       """)
     player = Player()
+    # Possible player directions and actions
     while True:
+        # define the player's start position
         position = ship.tile_at(player.x, player.y)
+        # print the intro at the start position
         print(position.intro_text())
+        # modify health points of player when attacked
+        position.modify_player(player)
         action_input = get_play_command()
         if action_input.lower() in ["forward", "for", "fore", "f"]:
             print("Go forward!")
@@ -29,7 +34,8 @@ def play():
             player.move_starboard()
         elif action_input.lower() in ["i", "inventory"]:
             player.print_inventory()
-
+        elif action_input.lower() in ["a", "attack"]:
+            player.attack()
         else:
             print("Invalid action!")
 

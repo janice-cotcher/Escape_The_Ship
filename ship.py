@@ -11,15 +11,21 @@ class MapTile:
     def intro_text(self):
         raise NotImplementedError("Create a subclass instead!")
 
+    def modify_player(self, player):
+        """Added modify_player to every tile"""
+        pass
+
 
 class StartTile(MapTile):
     """Player starting position"""
     def intro_text(self):
         return """
-        You find yourself in space ship under attack by an unknown enemy.
+        You find yourself in space under attack by an unknown enemy that
+        is boarding your ship.
         You need an escape pod to travel to safety on the nearby planet.
         You need supplies for the trip and suriving on the planet.
         You can go four directions: forward, aftward, port, starboard
+        You have two actions: inventory, attack
         """
 
 
@@ -67,10 +73,11 @@ class EnemyTile(MapTile):
             self.enemy = enemies.Robot()
             # print(r)
         # encounter trolls about 5% of the time
-        else:
+        elif r < 0.98 and r >= 0.95:
             self.enemy = enemies.Troll()
             # print(r)
-
+        else:
+            self.enemy = enemies.SpaceDucks()
         super().__init__(x, y)
 
     def intro_text(self):
@@ -79,6 +86,15 @@ class EnemyTile(MapTile):
             return "A {} awaits!".format(self.enemy.name)
         else:
             return "You've defeated the {}.".format(self.enemy.name)
+
+    def modify_player(self, player):
+        """
+        Checks the enemy's current strength so it can respond to the player
+        """
+        if self.enemy.is_alive():
+            player.hp -= self.enemy.damage
+            print("The {} does damage {}. You have {} HP remaining".
+                  format(self.enemy.name, self.enemy.damage, player.hp))
 
 
 # defining the layout of the space ship

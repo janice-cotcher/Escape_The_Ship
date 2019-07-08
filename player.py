@@ -1,4 +1,5 @@
 import items
+import ship
 
 
 class Player:
@@ -10,6 +11,7 @@ class Player:
         # player starting coordinates
         self.x = 1
         self.y = 2
+        self.hp = 100
 
     def print_inventory(self):
         """Print the inventory of items and the best weapon"""
@@ -52,3 +54,14 @@ class Player:
     def move_port(self):
         """Define movement towards the port side"""
         self.move(dx=-1, dy=0)
+
+    def attack(self):
+        best_weapon = self.most_powerful_weapon()
+        position = ship.tile_at(self.x, self.y)
+        enemy = position.enemy
+        print("You use {} against {}!".format(best_weapon.name, enemy.name))
+        enemy.hp -= best_weapon.damage
+        if not enemy.is_alive():
+            print("You killed a {}".format(enemy.name))
+        else:
+            print("{} HP is {}.".format(enemy.name, enemy.hp))

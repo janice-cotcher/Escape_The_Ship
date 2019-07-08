@@ -40,3 +40,12 @@ class Troll(Enemy):
         self.name = "Space Troll"
         self.hp = 80
         self.damage = 15
+
+
+class SpaceDucks(Enemy):
+    """A flock of blue space ducks with name, health points and damage"""
+    def __init__(self):
+        self.name = "Flock of Blue Space Ducks"
+        self.description = "Follows red space bread crumbs."
+        self.hp = 100
+        self.damage = 3
