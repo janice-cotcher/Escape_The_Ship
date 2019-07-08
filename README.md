@@ -60,3 +60,11 @@
         - added the enemy name to the print statement
     - added a base method to the MapTile class to implement modify_player on
     every tile
+* Step 11: p.92 -
+    - added enemy introductions to the MapTile class
+        - text uses \ for concatenation
+            - using + caused errors text was switched to multi-line string
+            blocks
+        - different introductions for alive and dead enemies
+            -  the text has a very strange way of stating the conditions that
+            was ignored

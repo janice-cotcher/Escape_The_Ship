@@ -13,3 +13,5 @@ v1.2
 - updated the intro text to reflect the ability to attack
 - added player health points
 - added ability to track the player and enemy health points
+v1.3
+- added enemy introductions

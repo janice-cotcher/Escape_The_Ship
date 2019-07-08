@@ -30,7 +30,7 @@ class StartTile(MapTile):
 
 
 class BoringTile(MapTile):
-    """Position with no matierals"""
+    """Position with no materials"""
     def intro_text(self):
         return """
         There are no supplies or an escape pod here.
@@ -63,29 +63,68 @@ class EnemyTile(MapTile):
         # encounter Drones about 50% of the time
         if r < 0.50:
             self.enemy = enemies.Drone()
+            self.alive_text = """
+            You hear a buzzing noise. You turn around and see an enemy drone
+            with its guns aimed at you
+            """
+            self.dead_text = """
+            The buzzing stops, the drone explodes and falls to the floor
+            """
             # print(r)
         # encounter Soldiers about 30% of the time
         elif r < 0.80 and r >= 50:
             self.enemy = enemies.Soldier()
+            self.alive_text = """
+            An enemy solider in a space suit jumps out from around the corner
+            and starts to fire.
+            """
+            self.dead_text = """
+            The solider drops its weapon and slumps to the floor.
+            """
             # print(r)
         # encounter robots about 15% of the time
         elif r < 0.95 and r >= 0.80:
             self.enemy = enemies.Robot()
+            self.alive_text = """
+            Your eye catches the glint of chrome in the flickering light. A
+            large red eye turns, scans your body, pauses and then opens fire.
+            """
+            self.dead_text = """
+            The large red eye grows dim as sparks file from the disabled robot.
+            """
             # print(r)
         # encounter trolls about 5% of the time
         elif r < 0.98 and r >= 0.95:
             self.enemy = enemies.Troll()
+            self.alive_text = """
+            Debris flies every where as a large space troll smashes equipment.
+            It suddenly stops and notices you trying to hide. It approaches
+            quickly and swings at you with its large fists.
+            """
+            self.dead_text = """
+            The troll clutches its mortal wounds as it falls with a loud thud
+            that shakes the whole ship.
+            """
             # print(r)
         else:
             self.enemy = enemies.SpaceDucks()
+            self.alive_text = """
+            You hear a deafening chorus of quacks. Suddenly you are lost in a
+            flock of blue space ducks as they peck at your head.
+            """
+            self.dead_text = """
+            The last duck explodes into a cloud of feathers.You wade through
+            large banks of blue feathers and try to clean off the ship's
+            equipment and unclog the blocked air ducts.
+            """
         super().__init__(x, y)
 
     def intro_text(self):
         """Intro message dependent on enemy health points"""
         if self.enemy.is_alive():
-            return "A {} awaits!".format(self.enemy.name)
+            return self.alive_text
         else:
-            return "You've defeated the {}.".format(self.enemy.name)
+            return self.dead_text
 
     def modify_player(self, player):
         """
