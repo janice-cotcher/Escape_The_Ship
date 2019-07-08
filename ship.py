@@ -1,5 +1,6 @@
 import random
 import enemies
+import sys
 
 
 class MapTile:
@@ -90,7 +91,7 @@ class EnemyTile(MapTile):
             large red eye turns, scans your body, pauses and then opens fire.
             """
             self.dead_text = """
-            The large red eye grows dim as sparks file from the disabled robot.
+            The large red eye grows dim as sparks fly from the disabled robot.
             """
             # print(r)
         # encounter trolls about 5% of the time
@@ -113,7 +114,7 @@ class EnemyTile(MapTile):
             flock of blue space ducks as they peck at your head.
             """
             self.dead_text = """
-            The last duck explodes into a cloud of feathers.You wade through
+            The last duck explodes into a cloud of feathers. You wade through
             large banks of blue feathers and try to clean off the ship's
             equipment and unclog the blocked air ducts.
             """
@@ -131,9 +132,18 @@ class EnemyTile(MapTile):
         Checks the enemy's current strength so it can respond to the player
         """
         if self.enemy.is_alive():
-            player.hp -= self.enemy.damage
-            print("The {} does damage {}. You have {} HP remaining".
-                  format(self.enemy.name, self.enemy.damage, player.hp))
+            # continue play if there's enough health points
+            if player.hp > self.enemy.damage:
+                player.hp -= self.enemy.damage
+                print("The {} does {} damage. You have {} HP remaining".
+                      format(self.enemy.name,
+                             self.enemy.damage,
+                             player.hp))
+            # end the game if the player runs out of health points
+            elif player.hp <= self.enemy.damage:
+                print("The {} causes mortal damage. You die.".
+                      format(self.enemy.name))
+                sys.exit()
 
 
 # defining the layout of the space ship

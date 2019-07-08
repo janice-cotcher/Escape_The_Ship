@@ -58,9 +58,11 @@
     - modified the modify_player method from the Text suggestion p.89
         - used assignment by subtraction
         - added the enemy name to the print statement
+        - added a condition that player health must be above 0 to continue
+            - this is missing from the text
     - added a base method to the MapTile class to implement modify_player on
     every tile
-* Step 11: p.92 -
+* Step 11: p.92 - 93
     - added enemy introductions to the MapTile class
         - text uses \ for concatenation
             - using + caused errors text was switched to multi-line string

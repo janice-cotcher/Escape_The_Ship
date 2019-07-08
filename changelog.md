@@ -15,3 +15,5 @@ v1.2
 - added ability to track the player and enemy health points
 v1.3
 - added enemy introductions
+v1.4
+- fixed a bug that generated negative health points

@@ -39,7 +39,7 @@ class Troll(Enemy):
     def __init__(self):
         self.name = "Space Troll"
         self.hp = 80
-        self.damage = 15
+        self.damage = 150
 
 
 class SpaceDucks(Enemy):
@@ -48,4 +48,4 @@ class SpaceDucks(Enemy):
         self.name = "Flock of Blue Space Ducks"
         self.description = "Follows red space bread crumbs."
         self.hp = 100
-        self.damage = 3
+        self.damage = 30

@@ -1,5 +1,6 @@
 from player import Player
 import ship
+# import sys
 
 
 def play():
@@ -18,6 +19,9 @@ def play():
         print(position.intro_text())
         # modify health points of player when attacked
         position.modify_player(player)
+        # if player.hp <= 0:
+        #     print("You have suffered mortal wounds and died. Game over.")
+        #     sys.exit()
         action_input = get_play_command()
         if action_input.lower() in ["forward", "for", "fore", "f"]:
             print("Go forward!")
