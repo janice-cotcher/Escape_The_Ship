@@ -70,3 +70,10 @@
         - different introductions for alive and dead enemies
             -  the text has a very strange way of stating the conditions that
             was ignored
+* Step 12: p.94 - 98
+    - added a Consumable class to items
+    - added a Protection class to items
+    - updated the inventory
+    - add a function to check for consumables in the Inventory
+        - added to the Player class
+    - add a function to check for protection items in the Inventory

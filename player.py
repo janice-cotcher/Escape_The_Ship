@@ -6,8 +6,9 @@ class Player:
     """Player class with inventory and best weapon"""
     def __init__(self):
         # begining items in inventory
-        self.inventory = [items.Blaster(), items.Knife(), "oxygen",
-                          "space suit", "first aid kit", "food", "water"]
+        self.inventory = [items.Blaster(), items.Knife(), items.OxygenTank(),
+                          items.SpaceSuit(), items.FirstAid(),
+                          items.CrustyBread(), items.Water(), items.Shelter()]
         # player starting coordinates
         self.x = 1
         self.y = 2
@@ -65,3 +66,65 @@ class Player:
             print("You killed a {}".format(enemy.name))
         else:
             print("{} HP is {}.".format(enemy.name, enemy.hp))
+
+    def heal(self):
+        """Check and use consumables for healing"""
+        # add consumables from the inventory
+        consumables = [item for item in self.inventory
+                       if isinstance(item, items.Consumable)]
+        # print a message if there are no consumables
+        if not consumables:
+            print("You do not have any items to heal you!")
+            return
+        # print out a list of available consumables
+        for i, item in enumerate(consumables, 1):
+            print("Choose an item to use to heal yourself: ")
+            print("{}. {}".format(i, item))
+        # choose a consumable from the list and use it
+        valid = False
+        while not valid:
+            choice = input("")
+            try:
+                to_use = consumables[int(choice) - 1]
+                # cap player's health points to 100
+                self.hp = min(100, self.hp + to_use.healing_value)
+                self.inventory.remove(to_use)
+                print("Current HP: {}".format(self.hp))
+                valid = True
+            except (ValueError, IndexError):
+                print("Invalid choice, try again.")
+
+    def protect(self):
+        """Check and use items for protection"""
+        # add protection items from Inventory
+        protection = [item for item in self.inventory
+                      if isinstance(item, items.Protection)]
+        # print a message if there are no protection items
+        if not protection:
+            print("You do not have any items to protect you!")
+            return
+        # print out a list of available consumables
+        for i, item in enumerate(protection, 1):
+            print("Choose an item to use to protect yourself: ")
+            print("{}. {}".format(i, item))
+        # choose a protection item from the list and use it
+        valid = False
+        while not valid:
+            choice = input("")
+            try:
+                to_use = protection[int(choice) - 1]
+                self.inventory.remove(to_use)
+                # decrease damage by using a protection item
+                position = ship.tile_at(self.x, self.y)
+                enemy = position.enemy
+                enemy.damage = enemy.damage - to_use.protect_value
+                if enemy.damage > 0:
+                    return enemy.damage
+                else:
+                    enemy.damage = 0
+                    return enemy.damage
+                self.inventory.remove(to_use)
+                print("Potential Damage: {}".format(enemy.damage))
+                valid = True
+            except (ValueError, IndexError):
+                print("Invalid choice, try again.")

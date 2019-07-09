@@ -24,9 +24,9 @@ class StartTile(MapTile):
         You find yourself in space under attack by an unknown enemy that
         is boarding your ship.
         You need an escape pod to travel to safety on the nearby planet.
-        You need supplies for the trip and suriving on the planet.
+        You need supplies for the trip and surviving on the planet.
         You can go four directions: forward, aftward, port, starboard
-        You have two actions: inventory, attack
+        You have four actions: inventory, attack, heal, protect
         """
 
 

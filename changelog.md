@@ -17,3 +17,6 @@ v1.3
 - added enemy introductions
 v1.4
 - fixed a bug that generated negative health points
+- added items with healing abilities
+- added items with protection abilities
+- added healing and damage details for when the player checks current inventory

@@ -40,6 +40,10 @@ def play():
             player.print_inventory()
         elif action_input.lower() in ["a", "attack"]:
             player.attack()
+        elif action_input.lower() in ["h", "heal"]:
+            player.heal()
+        elif action_input.lower() in ["p", "protect"]:
+            player.protect()
         else:
             print("Invalid action!")
 
