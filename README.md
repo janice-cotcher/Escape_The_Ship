@@ -75,5 +75,7 @@
     - added a Protection class to items
     - updated the inventory
     - add a function to check for consumables in the Inventory
+        - used isinstance to check objects
+        - used enumerate to print out the items
         - added to the Player class
     - add a function to check for protection items in the Inventory

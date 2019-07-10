@@ -80,3 +80,9 @@ class Shelter(Protection):
     def __init__(self):
         self.name = "Portable Shelter"
         self.protect_value = 100
+
+
+class Crusty_Bread(Protection):
+    def __init__(self):
+        self.name = "Crusty Bread"
+        self.protect_value = 0
