@@ -82,7 +82,7 @@ class Shelter(Protection):
         self.protect_value = 100
 
 
-class Crusty_Bread(Protection):
-    def __init__(self):
-        self.name = "Crusty Bread"
-        self.protect_value = 0
+# class Crusty_Bread(Protection):
+#     def __init__(self):
+#         self.name = "Crusty Bread"
+#         self.protect_value = 0

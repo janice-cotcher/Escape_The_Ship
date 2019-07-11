@@ -20,3 +20,6 @@ v1.4
 - added items with healing abilities
 - added items with protection abilities
 - added healing and damage details for when the player checks current inventory
+v1.5
+- only made valid actions available
+- player must fight the enemy while it is still alive

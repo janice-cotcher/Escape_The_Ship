@@ -19,6 +19,7 @@ class MapTile:
 
 class StartTile(MapTile):
     """Player starting position"""
+
     def intro_text(self):
         return """
         You find yourself in space under attack by an unknown enemy that
@@ -148,10 +149,10 @@ class EnemyTile(MapTile):
 
 # defining the layout of the space ship
 ship_map = [
-    [EnemyTile(0, 0), SuppliesTile(1, 0), None],
-    [None, BoringTile(1, 1), None],
+    [EnemyTile(0, 0), SuppliesTile(1, 0), BoringTile(2, 0)],
+    [BoringTile(0, 1), BoringTile(1, 1), BoringTile(2, 1)],
     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
-    [EscapePod(0, 3), BoringTile(1, 3), None]
+    [EscapePod(0, 3), BoringTile(1, 3), BoringTile(2, 3)]
 ]
 
 

@@ -77,5 +77,13 @@
     - add a function to check for consumables in the Inventory
         - used isinstance to check objects
         - used enumerate to print out the items
+        - make sure to emphasize the difference between function reference and
+        calling the function (also with objects)
         - added to the Player class
     - add a function to check for protection items in the Inventory
+* Step 13: p.99 - 106
+    - create a new function in game.py that stores all legal actions in a
+    dictionary
+    - used the get() method to account for invalid inputs
+    - removed get_play_command and replaced them with new action functions
+        - made the code much more efficient

@@ -8,8 +8,7 @@ class Player:
         # begining items in inventory
         self.inventory = [items.Blaster(), items.Knife(), items.OxygenTank(),
                           items.SpaceSuit(), items.FirstAid(),
-                          items.CrustyBread(), items.Water(), items.Shelter(),
-                          items.Crusty_Bread()]
+                          items.CrustyBread(), items.Water(), items.Shelter()]
         # player starting coordinates
         self.x = 1
         self.y = 2
@@ -80,8 +79,8 @@ class Player:
             return
 
         # print out a list of available consumables
+        print("Choose an item to use to heal yourself: ")
         for i, item in enumerate(consumables, 1):
-            print("Choose an item to use to heal yourself: ")
             print("{}. {}".format(i, item))
 
         # choose a consumable from the list and use it
@@ -92,6 +91,8 @@ class Player:
                 to_use = consumables[int(choice) - 1]
                 # cap player's health points to 100
                 self.hp = min(100, self.hp + to_use.healing_value)
+                # remove the used item from the inventory
+                # and print current health points
                 self.inventory.remove(to_use)
                 print("Current HP: {}".format(self.hp))
                 valid = True
@@ -108,7 +109,8 @@ class Player:
         if not protection:
             print("You do not have any items to protect you!")
             return
-
+        position = ship.tile_at(self.x, self.y)
+        enemy = position.enemy
         # print out a list of available protection items
         print("Choose an item to use to protect yourself: ")
         for i, item in enumerate(protection, 1):
@@ -120,23 +122,27 @@ class Player:
             choice = input("")
             try:
                 to_use = protection[int(choice) - 1]
+                # remove used item from the inventory
+                self.inventory.remove(to_use)
+                # define the enemy and position
                 position = ship.tile_at(self.x, self.y)
                 enemy = position.enemy
-                if enemy.name == "Flock of Blue Space Ducks":
-                    if to_use.name == "Crusty Bread":
-                        to_use.protect_value = 100
-                else:
-                    if to_use.name == "Crusty Bread":
-                        to_use.protect_value = 0
+                # allow Crusty Bread to protect player from Ducks
+                # if enemy.name == "Flock of Blue Space Ducks":
+                #     if to_use.name == "Crusty Bread":
+                #         to_use.protect_value = 100
+                # else:
+                #     if to_use.name == "Crusty Bread":
+                #         to_use.protect_value = 0
 
                 # decrease damage by using a protection item
+                # limit enemy damage to not drop below 0
                 enemy.damage = enemy.damage - to_use.protect_value
                 if enemy.damage > 0:
                     return enemy.damage
                 else:
                     enemy.damage = 0
                     return enemy.damage
-                self.inventory.remove(to_use)
                 print("Potential Damage: {}".format(enemy.damage))
                 valid = True
             except (ValueError, IndexError):
