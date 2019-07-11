@@ -23,3 +23,4 @@ v1.4
 v1.5
 - only made valid actions available
 - player must fight the enemy while it is still alive
+- updated the ship's map
