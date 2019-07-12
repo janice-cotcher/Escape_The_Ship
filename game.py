@@ -32,9 +32,8 @@ def get_available_actions(position, player):
         action_adder(actions, "a", player.attack, "Attack")
         action_adder(actions, "p", player.protect, "Protection")
     # add supplies option if there are any supplies left
-    if isinstance(position, ship.SuppliesTile):
-        if position.inventory:
-            action_adder(actions, "s", player.add_supplies, "Add Supplies")
+    elif isinstance(position, ship.SuppliesTile) and position.inventory:
+        action_adder(actions, "s", player.add_supplies, "Add Supplies")
     # option to move to another tile once all other actions are completed
     else:
         if ship.tile_at(position.x, position.y - 1):
