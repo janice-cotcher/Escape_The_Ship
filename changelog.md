@@ -24,3 +24,5 @@ v1.5
 - only made valid actions available
 - player must fight the enemy while it is still alive
 - updated the ship's map
+v1.6
+- added ability to add to inventory

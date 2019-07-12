@@ -6,12 +6,12 @@ class Player:
     """Player class with inventory and best weapon"""
     def __init__(self):
         # begining items in inventory
-        self.inventory = [items.Blaster(), items.Knife(), items.OxygenTank(),
-                          items.SpaceSuit(), items.FirstAid(),
-                          items.CrustyBread(), items.Water(), items.Shelter()]
+        self.inventory = [items.Knife()]
         # player starting coordinates
-        self.x = 1
-        self.y = 2
+        self.x = ship.start_tile_location[0]
+        self.y = ship.start_tile_location[1]
+        # self.x = 1
+        # self.y = 2
         self.hp = 100
 
     def print_inventory(self):
@@ -147,3 +147,9 @@ class Player:
                 valid = True
             except (ValueError, IndexError):
                 print("Invalid choice, try again.")
+
+    def add_supplies(self):
+        """Add supplies to the player's inventory"""
+        position = ship.tile_at(self.x, self.y)
+        current_inventory = self.inventory
+        position.add_inventory(current_inventory)

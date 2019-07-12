@@ -87,3 +87,16 @@
     - used the get() method to account for invalid inputs
     - removed get_play_command and replaced them with new action functions
         - made the code much more efficient
+* Step 14: p.107 - 114, 122
+    - created a map of the ship
+        - using domain specific language (DSL)
+        - created a dictionary of title types
+        - take the text map and create a list
+        - updated the start location
+* p. 115 - 122
+    - the text talks about adding value to items to be bought but that can be
+    added in the future if the game is expanded to nearby planet
+* Step 15: p. 115 - 122
+    - add supplies to the player's inventory once they find the supply tile
+        - the text does not explicitly show these steps but parts of the
+        for buying items was used

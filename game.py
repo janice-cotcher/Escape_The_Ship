@@ -6,12 +6,13 @@ from collections import OrderedDict
 def play():
     """ Input for character movement and accessing inventory"""
     print("Escape from the Ship!")
+    ship.parse_ship_dsl()
     player = Player()
     # Possible player directions and actions
     while True:
         # define the player's start position
         position = ship.tile_at(player.x, player.y)
-        print(player.x, player.y)
+        # print(player.x, player.y)
         # print the intro at the start position
         print(position.intro_text())
         # modify health points of player when attacked
@@ -23,11 +24,18 @@ def get_available_actions(position, player):
     """Only make valid actions available. Actions are stored in a dictionary"""
     actions = OrderedDict()
     print("Choose an action: ")
+    # print inventory option if there are any items
     if player.inventory:
         action_adder(actions, "i", player.print_inventory, "Print Inventory")
+    # attack and protect options if the enemy is alive
     if isinstance(position, ship.EnemyTile) and position.enemy.is_alive():
         action_adder(actions, "a", player.attack, "Attack")
         action_adder(actions, "p", player.protect, "Protection")
+    # add supplies option if there are any supplies left
+    if isinstance(position, ship.SuppliesTile):
+        if position.inventory:
+            action_adder(actions, "s", player.add_supplies, "Add Supplies")
+    # option to move to another tile once all other actions are completed
     else:
         if ship.tile_at(position.x, position.y - 1):
             action_adder(actions, "f", player.move_forward, "Go forward")
@@ -38,6 +46,7 @@ def get_available_actions(position, player):
         if ship.tile_at(position.x + 1, position.y):
             action_adder(actions, "s", player.move_starboard,
                          "Go starboard side")
+    # healing option if the player has less than 100 HP
     if player.hp < 100:
         action_adder(actions, "h", player.heal, "Heal")
 
