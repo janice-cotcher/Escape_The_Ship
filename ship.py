@@ -78,9 +78,16 @@ class SuppliesTile(MapTile):
 
 class EscapePod(MapTile):
     """Position that contains the escape pod"""
+    def modify_player(self, player):
+        """Player wins the game if they reach the exacpe pod"""
+        player.victory = True
+        sys.exit()
+
     def intro_text(self):
         return """
         You found the escape pod! You open the door and enter the pod.
+        The escape pod slowly disengages from the ship and travels to
+        the nearby planet. You are safe, for now...
         """
 
 
@@ -181,6 +188,13 @@ ship_map = [
     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
     [EscapePod(0, 3), BoringTile(1, 3), BoringTile(2, 3)]
 ]
+
+# ship_map = [
+#     [EnemyTile(0, 0), SuppliesTile(1, 0), None],
+#     [None, BoringTile(1, 1), None],
+#     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
+#     [EscapePod(0, 3), None, None]
+# ]
 
 
 def tile_at(x, y):

@@ -87,7 +87,7 @@
     - used the get() method to account for invalid inputs
     - removed get_play_command and replaced them with new action functions
         - made the code much more efficient
-* Step 14: p.107 - 114, 122
+* Step 14: p.107 - 114, 122-125
     - created a map of the ship
         - using domain specific language (DSL)
         - created a dictionary of title types
@@ -100,3 +100,8 @@
     - add supplies to the player's inventory once they find the supply tile
         - the text does not explicitly show these steps but parts of the
         for buying items was used
+* Step 16: p.127 - 129
+    - added conditions for winning to the Escape Pod tile
+* Appendix: p. 145
+    - has helpful suggests places to check in code for specific exceptions
+    for the RPG

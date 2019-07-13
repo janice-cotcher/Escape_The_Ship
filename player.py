@@ -8,11 +8,16 @@ class Player:
         # begining items in inventory
         self.inventory = [items.Knife()]
         # player starting coordinates
-        self.x = ship.start_tile_location[0]
-        self.y = ship.start_tile_location[1]
-        # self.x = 1
-        # self.y = 2
+        # self.x = ship.start_tile_location[0]
+        # self.y = ship.start_tile_location[1]
+        self.x = 1
+        self.y = 2
         self.hp = 100
+        self.victory = False
+
+    def is_alive(self):
+        """The player is alive if they have at least 1 HP"""
+        return self.hp > 0
 
     def print_inventory(self):
         """Print the inventory of items and the best weapon"""

@@ -26,3 +26,4 @@ v1.5
 - updated the ship's map
 v1.6
 - added ability to add to inventory
+- added conditions for winning

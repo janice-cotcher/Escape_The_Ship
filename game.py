@@ -6,18 +6,20 @@ from collections import OrderedDict
 def play():
     """ Input for character movement and accessing inventory"""
     print("Escape from the Ship!")
-    ship.parse_ship_dsl()
+    # ship.parse_ship_dsl()
     player = Player()
-    # Possible player directions and actions
-    while True:
+    # Possible player directions and actions continue as long as the player is
+    # alive and they have not reached the escape pod
+    while player.is_alive() and not player.victory:
         # define the player's start position
         position = ship.tile_at(player.x, player.y)
-        # print(player.x, player.y)
+        print(player.x, player.y)
         # print the intro at the start position
         print(position.intro_text())
         # modify health points of player when attacked
         position.modify_player(player)
-        choose_action(position, player)
+        if player.is_alive() and not player.victory:
+            choose_action(position, player)
 
 
 def get_available_actions(position, player):
@@ -27,13 +29,13 @@ def get_available_actions(position, player):
     # print inventory option if there are any items
     if player.inventory:
         action_adder(actions, "i", player.print_inventory, "Print Inventory")
+    # add supplies option if there are any supplies left
+    if isinstance(position, ship.SuppliesTile) and position.inventory:
+        action_adder(actions, "s", player.add_supplies, "Add Supplies")
     # attack and protect options if the enemy is alive
-    if isinstance(position, ship.EnemyTile) and position.enemy.is_alive():
+    elif isinstance(position, ship.EnemyTile) and position.enemy.is_alive():
         action_adder(actions, "a", player.attack, "Attack")
         action_adder(actions, "p", player.protect, "Protection")
-    # add supplies option if there are any supplies left
-    elif isinstance(position, ship.SuppliesTile) and position.inventory:
-        action_adder(actions, "s", player.add_supplies, "Add Supplies")
     # option to move to another tile once all other actions are completed
     else:
         if ship.tile_at(position.x, position.y - 1):
@@ -70,6 +72,18 @@ def choose_action(position, player):
             action()
         else:
             print("Invalid action!")
+
+
+def move_player(actions, player, position):
+    if ship.tile_at(position.x, position.y - 1):
+        return action_adder(actions, "f", player.move_forward, "Go forward")
+    if ship.tile_at(position.x, position.y + 1):
+        return action_adder(actions, "a", player.move_aftward, "Go aftward")
+    if ship.tile_at(position.x - 1, position.y):
+        return action_adder(actions, "p", player.move_port, "Go portside")
+    if ship.tile_at(position.x + 1, position.y):
+        return action_adder(actions, "s", player.move_starboard,
+                            "Go starboard side")
 
 
 play()
