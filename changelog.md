@@ -27,3 +27,5 @@ v1.5
 v1.6
 - added ability to add to inventory
 - added conditions for winning
+v1.7
+- bug fixes

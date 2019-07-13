@@ -13,7 +13,7 @@ def play():
     while player.is_alive() and not player.victory:
         # define the player's start position
         position = ship.tile_at(player.x, player.y)
-        print(player.x, player.y)
+        # print(player.x, player.y)
         # print the intro at the start position
         print(position.intro_text())
         # modify health points of player when attacked

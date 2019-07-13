@@ -23,7 +23,7 @@ class Knife(Weapon):
     def __init__(self):
         self.name = "Pocket Knife"
         self.description = """
-                            A foldable knife with one blade that can fit
+                            A knife with one blade that can fit
                             in the pocket when the blade is
                             folded into the handle.
                            """

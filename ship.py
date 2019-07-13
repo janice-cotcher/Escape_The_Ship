@@ -39,7 +39,7 @@ class BoringTile(MapTile):
     """Position with no materials"""
     def intro_text(self):
         return """
-        There are no supplies or an escape pod here.
+        There are no supplies or escape pod here.
         """
 
 
@@ -79,7 +79,7 @@ class SuppliesTile(MapTile):
 class EscapePod(MapTile):
     """Position that contains the escape pod"""
     def modify_player(self, player):
-        """Player wins the game if they reach the exacpe pod"""
+        """Player wins the game if they reach the escape pod"""
         player.victory = True
         sys.exit()
 
@@ -108,7 +108,7 @@ class EnemyTile(MapTile):
             """
             # print(r)
         # encounter Soldiers about 30% of the time
-        elif r < 0.80 and r >= 50:
+        elif r < 0.80 and r >= 0.50:
             self.enemy = enemies.Soldier()
             self.alive_text = """
             An enemy solider in a space suit jumps out from around the corner
@@ -133,7 +133,7 @@ class EnemyTile(MapTile):
         elif r < 0.98 and r >= 0.95:
             self.enemy = enemies.Troll()
             self.alive_text = """
-            Debris flies every where as a large space troll smashes equipment.
+            Debris flies everywhere as a large space troll smashes equipment.
             It suddenly stops and notices you trying to hide. It approaches
             quickly and swings at you with its large fists.
             """
@@ -218,7 +218,7 @@ ship_dsl = """
 
 def is_dsl_valid(dsl):
     """
-    Check to makre there is only one start tile and escape pod.
+    Check to make sure there is only one start tile and escape pod.
     Also check that each row has the same number of columns
     """
     if dsl.count("|ST|") != 1:
