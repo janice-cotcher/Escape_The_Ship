@@ -6,7 +6,7 @@ from collections import OrderedDict
 def play():
     """ Input for character movement and accessing inventory"""
     print("Escape from the Ship!")
-    # ship.parse_ship_dsl()
+    ship.parse_ship_dsl()
     player = Player()
     # Possible player directions and actions continue as long as the player is
     # alive and they have not reached the escape pod
@@ -27,6 +27,7 @@ def get_available_actions(position, player):
     actions = OrderedDict()
     print("Choose an action: ")
     # print inventory option if there are any items
+    action_adder(actions, "m", position.print_map, "Ship's Map")
     if player.inventory:
         action_adder(actions, "i", player.print_inventory, "Print Inventory")
     # add supplies option if there are any supplies left

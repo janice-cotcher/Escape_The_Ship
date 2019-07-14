@@ -29,3 +29,4 @@ v1.6
 - added conditions for winning
 v1.7
 - bug fixes
+- added a printable map

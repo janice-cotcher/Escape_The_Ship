@@ -20,6 +20,17 @@ class MapTile:
         """Added modify_player to every tile"""
         pass
 
+    def print_map(self):
+        self.ship_printable = """
+                            forward
+                |          |Supplies|       |
+        port    |          |        |       |  starboard
+                |          | Start  |       |
+                |Esacpe Pod|        |       |
+                            aftward
+        """
+        print(self.ship_printable)
+
 
 class StartTile(MapTile):
     """Player starting position"""
@@ -29,7 +40,7 @@ class StartTile(MapTile):
         You find yourself in space under attack by an unknown enemy that
         is boarding your ship.
         You need an escape pod to travel to safety on the nearby planet.
-        You need supplies for the trip and surviving on the planet.
+        You need supplies for the trip and survival on the planet.
         You can go four directions: forward, aftward, port, starboard
         You have four actions: inventory, attack, heal, protect
         """
@@ -182,13 +193,13 @@ class EnemyTile(MapTile):
 
 
 # defining the layout of the space ship
-ship_map = [
-    [EnemyTile(0, 0), SuppliesTile(1, 0), BoringTile(2, 0)],
-    [BoringTile(0, 1), BoringTile(1, 1), BoringTile(2, 1)],
-    [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
-    [EscapePod(0, 3), BoringTile(1, 3), BoringTile(2, 3)]
-]
-
+# ship_map = [
+#     [EnemyTile(0, 0), SuppliesTile(1, 0), BoringTile(2, 0)],
+#     [BoringTile(0, 1), BoringTile(1, 1), BoringTile(2, 1)],
+#     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
+#     [EscapePod(0, 3), BoringTile(1, 3), BoringTile(2, 3)]
+# ]
+ship_map = []
 # ship_map = [
 #     [EnemyTile(0, 0), SuppliesTile(1, 0), None],
 #     [None, BoringTile(1, 1), None],
@@ -209,10 +220,10 @@ def tile_at(x, y):
 
 # ship's map
 ship_dsl = """
-|ET|IT|  |
-|  |  |  |
+|ET|IT|BT|
+|BT|BT|BT|
 |ET|ST|ET|
-|EP|  |  |
+|EP|BT|BT|
 """
 
 
@@ -238,6 +249,7 @@ tile_type_dict = {"EP": EscapePod,
                   "ST": StartTile,
                   "IT": SuppliesTile,
                   "ET": EnemyTile,
+                  "BT": BoringTile,
                   "  ": None}
 
 start_tile_location = None
