@@ -20,17 +20,6 @@ class MapTile:
         """Added modify_player to every tile"""
         pass
 
-    def print_map(self):
-        self.ship_printable = """
-                            forward
-                |          |Supplies|       |
-        port    |          |        |       |  starboard
-                |          | Start  |       |
-                |Esacpe Pod|        |       |
-                            aftward
-        """
-        print(self.ship_printable)
-
 
 class StartTile(MapTile):
     """Player starting position"""
@@ -54,10 +43,31 @@ class BoringTile(MapTile):
         """
 
 
+class ViewMapTile(MapTile):
+    """Position that prints a map"""
+    def intro_text(self):
+        return """
+        You see a map on the wall.
+        """
+
+    def print_map(self):
+        """Print a map of the ship with directions"""
+        self.ship_printable = """
+                            forward
+                |          |Supplies|            |
+        port    |          |        |You are Here|  starboard
+                |          | Start  |            |
+                |Esacpe Pod|        |            |
+                            aftward
+        """
+        print(self.ship_printable)
+
+
 class SuppliesTile(MapTile):
     """Position that contains survival supplies"""
     def __init__(self, x, y):
         """Initial supplies at the tile"""
+        self.i = 0
         self.name = "Supplies"
         self.inventory = [items.Blaster(), items.OxygenTank(),
                           items.SpaceSuit(), items.FirstAid(),
@@ -66,11 +76,18 @@ class SuppliesTile(MapTile):
         super().__init__(x, y)
 
     def intro_text(self):
-        return """
+        self.start_supplies = """
         You see a large metal trunk. You open it.
         It's supplies! You found a first aid kit, an oxygen tank,
         a space suit, food, water, a pocket knife, and a ray gun.
         """
+        self.no_supplies = "No supplies left at this location"
+        supply_text = [self.start_supplies, self.no_supplies]
+        if self.i == 0:
+            self.i += 1
+            return supply_text[0]
+        else:
+            return supply_text[1]
 
     def suppy(self):
         """Message for what items were added"""
@@ -106,72 +123,102 @@ class EnemyTile(MapTile):
     """Enemy position and messages"""
     def __init__(self, x, y):
         """Creates a random position for each enemy"""
+        self.j = 0
+        self.k = 0
         r = random.random()
         # encounter Drones about 50% of the time
         if r < 0.50:
             self.enemy = enemies.Drone()
-            self.alive_text = """
+            alive_start = """
             You hear a buzzing noise. You turn around and see an enemy drone
             with its guns aimed at you
             """
-            self.dead_text = """
+            alive_attack = "The drone attacks."
+            self.alive_text = [alive_start, alive_attack]
+            dead_start = """
             The buzzing stops, the drone explodes and falls to the floor
             """
+            dead_return = "A disabled drone lays on the ground"
+            self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter Soldiers about 30% of the time
         elif r < 0.80 and r >= 0.50:
             self.enemy = enemies.Soldier()
-            self.alive_text = """
+            alive_start = """
             An enemy solider in a space suit jumps out from around the corner
             and starts to fire.
             """
-            self.dead_text = """
+            alive_attack = "The solider attacks."
+            self.alive_text = [alive_start, alive_attack]
+            dead_start = """
             The solider drops its weapon and slumps to the floor.
             """
+            dead_return = "A dead solider lays on the ground"
+            self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter robots about 15% of the time
         elif r < 0.95 and r >= 0.80:
             self.enemy = enemies.Robot()
-            self.alive_text = """
+            alive_start = """
             Your eye catches the glint of chrome in the flickering light. A
             large red eye turns, scans your body, pauses and then opens fire.
             """
-            self.dead_text = """
+            alive_attack = "The robot attacks."
+            self.alive_text = [alive_start, alive_attack]
+            dead_start = """
             The large red eye grows dim as sparks fly from the disabled robot.
             """
+            dead_return = "A disabled robot lays on the ground"
+            self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter trolls about 5% of the time
         elif r < 0.98 and r >= 0.95:
             self.enemy = enemies.Troll()
-            self.alive_text = """
+            alive_start = """
             Debris flies everywhere as a large space troll smashes equipment.
             It suddenly stops and notices you trying to hide. It approaches
             quickly and swings at you with its large fists.
             """
-            self.dead_text = """
+            alive_attack = "The troll attacks."
+            self.alive_text = [alive_start, alive_attack]
+            dead_start = """
             The troll clutches its mortal wounds as it falls with a loud thud
             that shakes the whole ship.
             """
+            dead_return = "A dead troll lays on the ground"
+            self.dead_text = [dead_start, dead_return]
             # print(r)
         else:
             self.enemy = enemies.SpaceDucks()
-            self.alive_text = """
+            alive_start = """
             You hear a deafening chorus of quacks. Suddenly you are lost in a
             flock of blue space ducks as they peck at your head.
             """
-            self.dead_text = """
+            alive_attack = "The ducks attack."
+            self.alive_text = [alive_start, alive_attack]
+            dead_start = """
             The last duck explodes into a cloud of feathers. You wade through
             large banks of blue feathers and try to clean off the ship's
             equipment and unclog the blocked air ducts.
             """
+            dead_return = "Dead ducks lie an a cloud of blue feathers"
+            self.dead_text = [dead_start, dead_return]
         super().__init__(x, y)
 
     def intro_text(self):
         """Intro message dependent on enemy health points"""
         if self.enemy.is_alive():
-            return self.alive_text
+            if self.j == 0:
+                self.j += 1
+                return self.alive_text[0]
+            else:
+                return self.alive_text[1]
         else:
-            return self.dead_text
+            if self.k == 0:
+                self.k += 1
+                return self.dead_text[0]
+            else:
+                return self.dead_text[1]
 
     def modify_player(self, player):
         """
@@ -221,7 +268,7 @@ def tile_at(x, y):
 # ship's map
 ship_dsl = """
 |ET|IT|BT|
-|BT|BT|BT|
+|BT|BT|MP|
 |ET|ST|ET|
 |EP|BT|BT|
 """
@@ -250,6 +297,7 @@ tile_type_dict = {"EP": EscapePod,
                   "IT": SuppliesTile,
                   "ET": EnemyTile,
                   "BT": BoringTile,
+                  "MP": ViewMapTile,
                   "  ": None}
 
 start_tile_location = None

@@ -24,12 +24,15 @@ def play():
 
 def get_available_actions(position, player):
     """Only make valid actions available. Actions are stored in a dictionary"""
+    # store actions in a dictionary
     actions = OrderedDict()
     print("Choose an action: ")
     # print inventory option if there are any items
-    action_adder(actions, "m", position.print_map, "Ship's Map")
     if player.inventory:
         action_adder(actions, "i", player.print_inventory, "Print Inventory")
+    # print the ship's map
+    if isinstance(position, ship.ViewMapTile):
+        action_adder(actions, "m", position.print_map, "Ship's Map")
     # add supplies option if there are any supplies left
     if isinstance(position, ship.SuppliesTile) and position.inventory:
         action_adder(actions, "s", player.add_supplies, "Add Supplies")
@@ -57,8 +60,8 @@ def get_available_actions(position, player):
 
 def action_adder(action_dict, hotkey, action, name):
     """Add actions to the dictionary"""
-    hotkey = hotkey.lower()
-    action_dict[hotkey] = action
+    action_dict[hotkey.lower()] = action
+    action_dict[hotkey.upper()] = action
     print("{}: {}".format(hotkey, name))
 
 
