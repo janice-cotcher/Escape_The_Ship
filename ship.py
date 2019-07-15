@@ -137,7 +137,7 @@ class EnemyTile(MapTile):
         # generate a random number to estabilish a random enemy
         r = random.random()
         # encounter Drones about 50% of the time
-        if r < 0.50:
+        if r < 0.30:
             self.enemy = enemies.Drone()
             alive_start = """
             You hear a buzzing noise. You turn around and see an enemy drone
@@ -152,7 +152,7 @@ class EnemyTile(MapTile):
             self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter Soldiers about 30% of the time
-        elif r < 0.80 and r >= 0.50:
+        elif r < 0.60 and r >= 0.30:
             self.enemy = enemies.Soldier()
             alive_start = """
             An enemy solider in a space suit jumps out from around the corner
@@ -167,7 +167,7 @@ class EnemyTile(MapTile):
             self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter robots about 15% of the time
-        elif r < 0.95 and r >= 0.80:
+        elif r < 0.75 and r >= 0.60:
             self.enemy = enemies.Robot()
             alive_start = """
             Your eye catches the glint of chrome in the flickering light. A
@@ -182,7 +182,7 @@ class EnemyTile(MapTile):
             self.dead_text = [dead_start, dead_return]
             # print(r)
         # encounter trolls about 5% of the time
-        elif r < 0.98 and r >= 0.95:
+        elif r < 0.90 and r >= 0.75:
             self.enemy = enemies.Troll()
             alive_start = """
             Debris flies everywhere as a large space troll smashes equipment.

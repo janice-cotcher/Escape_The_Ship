@@ -38,12 +38,6 @@ class Consumable():
         return "{} (+ {} HP)".format(self.name, self.healing_value)
 
 
-class CrustyBread(Consumable):
-    def __init__(self):
-        self.name = "Crusty Bread"
-        self.healing_value = 5
-
-
 class Water(Consumable):
     def __init__(self):
         self.name = "Water"
@@ -82,7 +76,8 @@ class Shelter(Protection):
         self.protect_value = 100
 
 
-# class Crusty_Bread(Protection):
-#     def __init__(self):
-#         self.name = "Crusty Bread"
-#         self.protect_value = 0
+class CrustyBread(Consumable, Protection):
+    def __init__(self):
+        self.name = "Crusty Bread"
+        self.healing_value = 5
+        self.protect_value = 0
