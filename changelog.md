@@ -30,3 +30,5 @@ v1.6
 v1.7
 - bug fixes
 - added a printable map
+v1.8
+- updated protection items
