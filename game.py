@@ -59,7 +59,7 @@ def get_available_actions(position, player):
 
 
 def action_adder(action_dict, hotkey, action, name):
-    """Add actions to the dictionary"""
+    """Add actions to the dictionary and prints the corresponding command"""
     action_dict[hotkey.lower()] = action
     action_dict[hotkey.upper()] = action
     print("{}: {}".format(hotkey, name))
@@ -79,6 +79,7 @@ def choose_action(position, player):
 
 
 def move_player(actions, player, position):
+    """Define player movement dependent on position"""
     if ship.tile_at(position.x, position.y - 1):
         return action_adder(actions, "f", player.move_forward, "Go forward")
     if ship.tile_at(position.x, position.y + 1):

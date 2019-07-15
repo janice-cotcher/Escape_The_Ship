@@ -31,6 +31,7 @@ class Player:
         """Determine the most power weapon in the inventory"""
         max_damage = 0
         best_weapon = None
+        # check the damage of each weapon in the inventory
         for item in self.inventory:
             try:
                 if item.damage > max_damage:
@@ -62,11 +63,16 @@ class Player:
         self.move(dx=-1, dy=0)
 
     def attack(self):
+        """Attack the enemy by removing health points"""
+        # always use the best weapon in the inventory
         best_weapon = self.most_powerful_weapon()
+        # define the enemy's poition in the ship
         position = ship.tile_at(self.x, self.y)
         enemy = position.enemy
+        # declare which weapon is used and change the value of the enemy's hp
         print("You use {} against {}!".format(best_weapon.name, enemy.name))
         enemy.hp -= best_weapon.damage
+        # print out if the enemy is alive and how many hps remain
         if not enemy.is_alive():
             print("You killed a {}".format(enemy.name))
         else:
@@ -154,7 +160,9 @@ class Player:
                 print("Invalid choice, try again.")
 
     def add_supplies(self):
-        """Add supplies to the player's inventory"""
+        """Add supplies to the player's inventory when supplies are found"""
+        # define the position in the ship
         position = ship.tile_at(self.x, self.y)
+        # add the inventory from the supply tile to the player's inventory
         current_inventory = self.inventory
         position.add_inventory(current_inventory)

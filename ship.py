@@ -25,6 +25,7 @@ class StartTile(MapTile):
     """Player starting position"""
 
     def intro_text(self):
+        """Descriptive text for the Start Tile"""
         return """
         You find yourself in space under attack by an unknown enemy that
         is boarding your ship.
@@ -46,6 +47,7 @@ class BoringTile(MapTile):
 class ViewMapTile(MapTile):
     """Position that prints a map"""
     def intro_text(self):
+        """Descriptive text for the Viewable Map Tile"""
         return """
         You see a map on the wall.
         """
@@ -67,6 +69,7 @@ class SuppliesTile(MapTile):
     """Position that contains survival supplies"""
     def __init__(self, x, y):
         """Initial supplies at the tile"""
+        # index for switching descriptive messagages
         self.i = 0
         self.name = "Supplies"
         self.inventory = [items.Blaster(), items.OxygenTank(),
@@ -76,13 +79,18 @@ class SuppliesTile(MapTile):
         super().__init__(x, y)
 
     def intro_text(self):
+        """Descriptive texts for the Start Tile"""
+        # initial description
         self.start_supplies = """
         You see a large metal trunk. You open it.
         It's supplies! You found a first aid kit, an oxygen tank,
         a space suit, food, water, a pocket knife, and a ray gun.
         """
+        # description after supplies are added
         self.no_supplies = "No supplies left at this location"
+        # define the descriptive text for the supply text
         supply_text = [self.start_supplies, self.no_supplies]
+        # switch messages after the supplies are added
         if self.i == 0:
             self.i += 1
             return supply_text[0]
@@ -123,8 +131,10 @@ class EnemyTile(MapTile):
     """Enemy position and messages"""
     def __init__(self, x, y):
         """Creates a random position for each enemy"""
+        # Indices j, k for switching alive_text and dead_text messages
         self.j = 0
         self.k = 0
+        # generate a random number to estabilish a random enemy
         r = random.random()
         # encounter Drones about 50% of the time
         if r < 0.50:
@@ -208,11 +218,14 @@ class EnemyTile(MapTile):
     def intro_text(self):
         """Intro message dependent on enemy health points"""
         if self.enemy.is_alive():
+            # Switch from the intro message after the player starts attacking
             if self.j == 0:
                 self.j += 1
                 return self.alive_text[0]
             else:
                 return self.alive_text[1]
+        # switch from the intro message if the player returns to the tile
+        # where there is a dead enemy
         else:
             if self.k == 0:
                 self.k += 1
@@ -246,13 +259,8 @@ class EnemyTile(MapTile):
 #     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
 #     [EscapePod(0, 3), BoringTile(1, 3), BoringTile(2, 3)]
 # ]
+# initialize the ship's map
 ship_map = []
-# ship_map = [
-#     [EnemyTile(0, 0), SuppliesTile(1, 0), None],
-#     [None, BoringTile(1, 1), None],
-#     [EnemyTile(0, 2), StartTile(1, 2), EnemyTile(2, 2)],
-#     [EscapePod(0, 3), None, None]
-# ]
 
 
 def tile_at(x, y):
@@ -292,6 +300,7 @@ def is_dsl_valid(dsl):
     return True
 
 
+# key to the ship's map
 tile_type_dict = {"EP": EscapePod,
                   "ST": StartTile,
                   "IT": SuppliesTile,
@@ -299,7 +308,7 @@ tile_type_dict = {"EP": EscapePod,
                   "BT": BoringTile,
                   "MP": ViewMapTile,
                   "  ": None}
-
+# initialize the start tile
 start_tile_location = None
 
 
