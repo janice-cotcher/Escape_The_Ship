@@ -59,7 +59,7 @@ class ViewMapTile(MapTile):
                 |          |Supplies|            |
         port    |          |        |You are Here|  starboard
                 |          | Start  |            |
-                |Esacpe Pod|        |            |
+                |Escape Pod|        |            |
                             aftward
         """
         print(self.ship_printable)
