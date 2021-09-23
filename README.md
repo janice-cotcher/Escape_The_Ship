@@ -1,6 +1,6 @@
 # Escape the Ship
 
-Escape the Ship is a Python text-based adventure game.
+Escape the Ship is an example of a Python text-based adventure game.
 
 ## Installation
 
